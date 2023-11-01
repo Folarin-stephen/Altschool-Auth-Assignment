@@ -7,8 +7,10 @@ const db = require('./users.db')
 const router = express.Router();
 
 
-router.get('/',gMiddleware.checkAdmin, gMiddleware.basicAuth, controller.getUsers )
+router.get('/',gMiddleware.apiKeyAuth, gMiddleware.checkAdmin, controller.getUsers )
 
-router.post('/', middleware.validateUserCreation, controller.createUser)
+router.post('/signup', middleware.validateUserCreation, controller.createUser)
+
+router.post('/login', middleware.LoginValidation, controller.Login)
 
 module.exports = router
